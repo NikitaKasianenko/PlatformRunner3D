@@ -5,13 +5,13 @@ namespace Project.SceneAccess
 {
     public class CheckSceneAccess : MonoBehaviour
     {
-        private const string initialSceneName = "Initial";
+        private const string InitialSceneName = "Initial";
 
         private void Awake()
         {
             if (!SceneAccess.WasOnInitial)
             {
-                SceneManager.LoadScene(initialSceneName, LoadSceneMode.Single);
+                SceneManager.LoadScene(InitialSceneName, LoadSceneMode.Single);
             }
         }
         
