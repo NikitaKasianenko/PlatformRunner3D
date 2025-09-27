@@ -1,4 +1,6 @@
-﻿using Data;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Data;
 using Game.CameraLogic;
 using Game.Infrastructure.Factory;
 using Game.Infrastructure.Services.PersistentProgress;
@@ -15,24 +17,24 @@ namespace Game.Infrastructure.States
         private readonly ICameraFollow _cameraFollow;
         private readonly IProgressWatchersRegister _progressWatchersRegister;
         private readonly IPersistentProgressService _persistentProgressService;
+        private readonly IEnumerable<ISaveProgressReader> _saveProgressReaders;
 
         public InitializeGameplayState(GameStateMachine gameStateMachine,IGameFactory gameFactory, ICameraFollow  cameraFollow,
-            IProgressWatchersRegister  progressWatchersRegister, IPersistentProgressService  persistentProgressService)
+            IProgressWatchersRegister  progressWatchersRegister, IPersistentProgressService  persistentProgressService, IEnumerable<ISaveProgressReader> saveProgressReaders)
         {
             _gameStateMachine = gameStateMachine;
             _gameFactory = gameFactory;
             _cameraFollow = cameraFollow;
             _progressWatchersRegister = progressWatchersRegister;
             _persistentProgressService = persistentProgressService;
+            _saveProgressReaders = saveProgressReaders;
         }
         public void Enter()
         {
             _progressWatchersRegister.CleanUp();
-            
             SetupWorld();
+            RegisterSceneReaders();
             InformProgressReaders();
-            
-            
             _gameStateMachine.Enter<GameLoopState>();
         }
 
@@ -46,6 +48,15 @@ namespace Game.Infrastructure.States
             foreach (var progressReader in _progressWatchersRegister.Readers)
             {
                 progressReader.LoadProgress(_persistentProgressService.Progress);
+            }
+        }
+
+        private void RegisterSceneReaders()
+        {
+
+            foreach (var reader in _saveProgressReaders)
+            {
+                _progressWatchersRegister.Register(reader);
             }
         }
 

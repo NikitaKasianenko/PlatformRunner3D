@@ -1,10 +1,11 @@
-﻿using Game.Infrastructure.Factory;
+﻿using System;
+using Game.Infrastructure.Factory;
 using Game.Infrastructure.States;
 using Game.Infrastructure.States.StateMachine;
 using UnityEngine;
 using Zenject;
 
-namespace Project
+namespace Project.Bootstrap
 {
     public class ProjectBootstrapper : MonoBehaviour
     {
@@ -18,6 +19,8 @@ namespace Project
             _gameStateMachine = gameStateMachine;
         }
 
+   
+
         private void Start()
         {
             Debug.Log(">>> ProjectBootstrapper started");
@@ -26,7 +29,7 @@ namespace Project
             _gameStateMachine.RegisterState(_statesFactory.Create<LoadLevelState>());
             _gameStateMachine.Enter<BootstrapState>();
             
-            SceneAccess.WasOnInitial = true;
+            SceneAccess.SceneAccess.WasOnInitial = true;
             
         }
         

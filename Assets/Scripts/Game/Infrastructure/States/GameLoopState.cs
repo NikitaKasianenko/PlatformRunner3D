@@ -1,10 +1,10 @@
-using System;
-using Data;
 using Game.CameraLogic;
+using Game.Infrastructure.Coroutine;
 using Game.Infrastructure.Services.PersistentProgress;
 using Game.Infrastructure.Signals;
 using Game.Infrastructure.States.StateMachine;
 using Game.Player;
+using Project.StaticData;
 using UnityEngine;
 using Zenject;
 
@@ -15,12 +15,16 @@ namespace Game.Infrastructure.States
         private readonly ICameraFollow _cameraFollow;
         private readonly IPersistentProgressService _persistentProgressService;
         private readonly SignalBus _signalBus;
+        private readonly IStaticDataService _staticDataService;
+        private bool _isRespawning;
 
 
-        public GameLoopState(IPersistentProgressService persistentProgressService, SignalBus  signalBus)
+        public GameLoopState(IPersistentProgressService persistentProgressService,ICameraFollow cameraFollow, SignalBus  signalBus,IStaticDataService staticDataService)
         {
             _persistentProgressService = persistentProgressService;
+            _cameraFollow = cameraFollow;
             _signalBus = signalBus;
+            _staticDataService = staticDataService;
         }
         public void Enter()
         {
@@ -32,10 +36,21 @@ namespace Game.Infrastructure.States
             _signalBus.Unsubscribe<PlayerDiedSignal>(OnPlayerDied);
         }
 
-        private void OnPlayerDied(PlayerDiedSignal signal)
+        private async void OnPlayerDied(PlayerDiedSignal signal)
         {
-            var player = signal.PlayerGameObject.GetComponent<PlayerMove>();
-            player.Warp(_persistentProgressService.Progress.WorldData.PositionOnLevel.Position);
+            if (_isRespawning)
+                return;
+            _isRespawning = true;
+            
+            var playerMove = signal.PlayerGameObject.GetComponent<PlayerMove>();
+            var playerRagdoll = signal.PlayerGameObject.GetComponent<PlayerRagdoll>();
+            
+            _cameraFollow.Follow(playerRagdoll.transformToFollow);
+            await playerRagdoll.ActivateRagdoll(_staticDataService.GameSettings.RespawnDuration);
+            _cameraFollow.Follow(signal.PlayerGameObject.transform);
+            
+            playerMove.Warp(_persistentProgressService.Progress.WorldData.PositionOnLevel.Position);
+            _isRespawning = false;
         }
     }
                 

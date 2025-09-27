@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Project
+namespace Project.SceneAccess
 {
     public class CheckSceneAccess : MonoBehaviour
     {

@@ -50,6 +50,8 @@ namespace Game.Player
 
         private void Update()
         {
+            if(!_characterController.enabled)
+                return;
             IsGroundedCustom();
             HandleJump();
             HandleMove();
@@ -114,7 +116,6 @@ namespace Game.Player
         public void LoadProgress(PlayerProgress progress)
         {
             
-            Debug.Log(progress.ToJson());
             if (CurrentLevel() == progress.WorldData.PositionOnLevel.Level)
             {
                 Vector3Data savedPosition = progress.WorldData.PositionOnLevel.Position;
@@ -128,7 +129,12 @@ namespace Game.Player
         public void Warp(Vector3Data to)
         {
             _characterController.enabled = false;
+
             transform.position = to.AsUnityVector();
+            transform.rotation = Quaternion.identity;
+            velocity = Vector3.zero;
+            verticalSpeed = 0f;
+
             _characterController.enabled = true;
         }
 

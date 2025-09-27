@@ -5,7 +5,7 @@ namespace Game.Infrastructure.Coroutine
 {
     public class CoroutineRunner : MonoBehaviour, ICoroutineRunner 
     {
-        public UnityEngine.Coroutine StartCoroutine(IEnumerator routine)
+        public new UnityEngine.Coroutine StartCoroutine(IEnumerator routine)
         {
             return base.StartCoroutine(routine);
         }

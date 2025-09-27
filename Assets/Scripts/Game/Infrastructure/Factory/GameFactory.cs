@@ -17,8 +17,6 @@ namespace Game.Infrastructure.Factory
         private readonly DiContainer _container;
         private readonly IProgressWatchersRegister _progressWatchersRegister;
 
-        public List<ISaveProgressReader>  ProgressReaders { get; } = new List<ISaveProgressReader>();
-        public List<ISaveProgress>  ProgressWriters { get; } = new List<ISaveProgress>();
 
         public GameFactory(IAssets  assets, DiContainer container, IProgressWatchersRegister  progressWatchersRegister)
         {
@@ -26,7 +24,6 @@ namespace Game.Infrastructure.Factory
             _container = container;
             _progressWatchersRegister = progressWatchersRegister;
         }
-
 
         public GameObject CreatePlayer(Vector3 at)
         {
@@ -41,13 +38,10 @@ namespace Game.Infrastructure.Factory
         {
             foreach (ISaveProgressReader progressReader in player.GetComponentsInChildren<ISaveProgressReader>())
             {
-                Register(progressReader);
+                _progressWatchersRegister.Register(progressReader);
+
             }
         }
 
-        private void Register(ISaveProgressReader progressReader)
-        {
-            _progressWatchersRegister.Register(progressReader);
-        }
     }
 }

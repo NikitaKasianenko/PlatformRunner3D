@@ -1,4 +1,5 @@
-﻿using Data;
+﻿using System.Collections.Generic;
+using Data;
 using Game.Infrastructure.Services.PersistentProgress;
 using Game.Infrastructure.Services.SaveLoad;
 using Game.Infrastructure.States.StateMachine;
@@ -33,7 +34,11 @@ namespace Game.Infrastructure.States
                 _saveLoadService.LoadProgress()
                 ?? NewProgress();
 
-        private PlayerProgress NewProgress() => new PlayerProgress(initialLevel: "Game");
+        private PlayerProgress NewProgress()
+        {
+            var playerProgress = new PlayerProgress("Game");
+            return playerProgress;
+        }
     }
     
     

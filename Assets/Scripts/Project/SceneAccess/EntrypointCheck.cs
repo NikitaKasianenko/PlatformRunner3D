@@ -1,4 +1,4 @@
-﻿namespace Project
+﻿namespace Project.SceneAccess
 {
     public class EntrypointCheck
     {

@@ -5,6 +5,7 @@ using Game.Infrastructure.AssetsManagement;
 using Game.Infrastructure.Factory;
 using Game.Infrastructure.Services;
 using Game.Infrastructure.Services.Input;
+using Game.Infrastructure.Services.PersistentProgress;
 using Game.Infrastructure.Services.SaveLoad;
 using Game.Infrastructure.Signals;
 using Game.Infrastructure.States;
@@ -28,8 +29,17 @@ namespace Game.Bootstrap
             BindAssets();
             BindGameFactory();
             BindSignals();
+            BindReaders();
 
         }
+
+        private void BindReaders()
+        {
+            Container.Bind<ISaveProgressReader>()
+                .FromComponentsInHierarchy()
+                .AsTransient();
+        }
+
 
         private void BindSignals()
         {

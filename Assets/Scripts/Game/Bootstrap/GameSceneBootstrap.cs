@@ -24,6 +24,8 @@ namespace Game.Bootstrap
 
         public void Initialize()
         {
+            Application.targetFrameRate = 120;
+            QualitySettings.vSyncCount = 0;
             _gameStateMachine.RegisterState(_initState);
             _gameStateMachine.RegisterState(_loopState);
         }

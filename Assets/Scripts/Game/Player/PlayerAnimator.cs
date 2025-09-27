@@ -23,6 +23,8 @@ namespace Game.Player
 
         private void Update()
         {
+            if (!_animator.enabled)
+                return;
             _animator.SetFloat(PlanarSpeedHash, _player.planarSpeed);
             _animator.SetFloat(VerticalSpeedHash, _player.verticalSpeed);
             _animator.SetBool(IsGroundedSpeedHash, _player.isGrounded);
