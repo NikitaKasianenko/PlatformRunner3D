@@ -2,14 +2,14 @@
 using Game.Infrastructure.Services.PersistentProgress;
 using Game.Infrastructure.Services.SaveLoad;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using Zenject;
 
-namespace Game.Player
+namespace Game.Checkpoint
 {
     public class CheckPoint : MonoBehaviour, ISaveProgressReader
     {
         [SerializeField] private string persistentId = "0";
+        [SerializeField] private ParticleSystem _VFX;
         private string _composeCollectedKey = "Key";
 
         private ISaveLoadService _saveLoadService;
