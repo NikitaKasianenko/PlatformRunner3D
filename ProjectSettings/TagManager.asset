@@ -8,6 +8,7 @@ TagManager:
   - DeadZone
   - Coin
   - SpawnPoint
+  - MovingPlatform
   layers:
   - Default
   - TransparentFX
