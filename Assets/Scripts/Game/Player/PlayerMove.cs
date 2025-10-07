@@ -55,10 +55,16 @@ namespace Game.Player
             IsGroundedCustom();
             HandleJump();
             HandleMove();
+            
         }
 
         private void HandleJump()
         {
+            bool wantJump = Input.GetKeyDown(KeyCode.Space);
+            if (wantJump)
+            {
+                // Debug.Log(wantJump);
+            }
             if (isGrounded && velocity.y < 0)
             {
                 velocity.y = -2f;
@@ -66,6 +72,7 @@ namespace Game.Player
 
             if (isGrounded && _inputService.IsJumpButtonUp)
             {
+                // Debug.Log("Jumped");
                 velocity.y = Mathf.Sqrt(_jumpHeight * -2f * _gravity);
             }
 
@@ -107,7 +114,14 @@ namespace Game.Player
         
         void  IsGroundedCustom()
         {
-            isGrounded = Physics.CheckSphere(_groundCheck.position, _groundCheckRadius, _groundLayer);
+            isGrounded = Physics.CheckSphere(_groundCheck.position, _groundCheckRadius, _groundLayer) || _characterController.isGrounded;
+        }
+        
+        private void OnDrawGizmosSelected()
+        {
+            if (_groundCheck == null) return;
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(_groundCheck.position, _groundCheckRadius);
         }
         
 
@@ -115,14 +129,10 @@ namespace Game.Player
 
         public void LoadProgress(PlayerProgress progress)
         {
-            
-            if (CurrentLevel() == progress.WorldData.PositionOnLevel.Level)
+            Vector3Data savedPosition = progress.WorldData.GetPositionForLevel(GlobalUtils.CurrentLevel());
+            if (savedPosition != null)
             {
-                Vector3Data savedPosition = progress.WorldData.PositionOnLevel.Position;
-                if (savedPosition != null)
-                {
-                    Warp(to: savedPosition);
-                }
+                Warp(to: savedPosition);
             }
         }
 
@@ -138,14 +148,10 @@ namespace Game.Player
             _characterController.enabled = true;
         }
 
-        private string CurrentLevel()
-        {
-            return SceneManager.GetActiveScene().name;
-        }
 
         public void UpdateProgress(PlayerProgress progress)
         {
-            progress.WorldData.PositionOnLevel = new PositionOnLevel(CurrentLevel(), transform.position.AsVectorData());
+            progress.WorldData.SetPositionForLevel(GlobalUtils.CurrentLevel(),transform.position.AsVectorData());
         }
 
         private void OnTriggerEnter(Collider other)

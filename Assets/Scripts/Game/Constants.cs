@@ -1,4 +1,6 @@
-﻿namespace Game
+﻿using UnityEngine.SceneManagement;
+
+namespace Game
 {
     public static class Constants
     {
@@ -8,5 +10,12 @@
         public const string DeadZoneTag = "DeadZone";
         public const string Player = "Player";
         public const string SpawnPoint = "SpawnPoint";
+        
+        private static string CurrentLevel()
+        {
+            return SceneManager.GetActiveScene().name;
+        }
     }
+    
+    
 }

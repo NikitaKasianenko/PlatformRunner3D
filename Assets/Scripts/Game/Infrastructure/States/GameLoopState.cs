@@ -47,9 +47,14 @@ namespace Game.Infrastructure.States
             
             _cameraFollow.Follow(playerRagdoll.transformToFollow);
             await playerRagdoll.ActivateRagdoll(_staticDataService.GameSettings.RespawnDuration);
+            if(signal.PlayerGameObject == null)
+            {
+                _isRespawning = false;
+                return;
+            }
             _cameraFollow.Follow(signal.PlayerGameObject.transform);
             
-            playerMove.Warp(_persistentProgressService.Progress.WorldData.PositionOnLevel.Position);
+            playerMove.Warp(_persistentProgressService.Progress.WorldData.GetPositionForLevel(GlobalUtils.CurrentLevel()));
             _isRespawning = false;
         }
     }

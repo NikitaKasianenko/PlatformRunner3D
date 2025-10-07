@@ -33,18 +33,20 @@ namespace Game.Player
             if (!other.CompareTag(Constants.Player))
                 return;
 
+            string sceneName = gameObject.scene.name;
+
             if (!_progressService.Progress.WorldData.CheckPoints.Contains(_composeCollectedKey))
-            {
                 _progressService.Progress.WorldData.CheckPoints.Add(_composeCollectedKey);
-            }
+
+            _progressService.Progress.WorldData.SetPositionForLevel(sceneName, transform.position.AsVectorData());
 
             _saveLoadService.SaveProgress();
             DisableSelf();
         }
 
         private void DisableSelf()
-        {   
-            gameObject.SetActive(false);
+        {
+            if (gameObject != null) gameObject.SetActive(false);
         }
 
         public void LoadProgress(PlayerProgress progress)

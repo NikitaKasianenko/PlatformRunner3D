@@ -7,5 +7,6 @@ namespace Game.Infrastructure.Factory
     public interface IGameFactory
     {
         GameObject CreatePlayer(Vector3 at);
+        void CreateHud();
     }
 }

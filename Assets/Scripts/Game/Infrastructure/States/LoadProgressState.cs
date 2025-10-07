@@ -9,24 +9,36 @@ namespace Game.Infrastructure.States
 {
     public class LoadProgressState : IState
     {
+        private const string InitialLevel = "Level1";
         private readonly GameStateMachine _gameStateMachine;
         private readonly IPersistentProgressService _progressService;
         private ISaveLoadService _saveLoadService;
+        private readonly IPlayerSettingsService _playerSettingsService;
 
-        public LoadProgressState(GameStateMachine gameStateMachine,IPersistentProgressService  progressService, ISaveLoadService saveLoadService)
+        public LoadProgressState(GameStateMachine gameStateMachine,
+            IPersistentProgressService  progressService,
+            ISaveLoadService saveLoadService,
+            IPlayerSettingsService playerSettingsService)
         {
             _gameStateMachine = gameStateMachine;
             _progressService = progressService;
             _saveLoadService = saveLoadService;
+            _playerSettingsService = playerSettingsService;
         }
         public void Enter()
         {
             LoadProgressOrUnitNew();
-            _gameStateMachine.Enter<LoadLevelState,string>(_progressService.Progress.WorldData.PositionOnLevel.Level);
+            LoadSettings();
+            _gameStateMachine.Enter<MainMenuState>();
         }
 
         public void Exit()
         {
+        }
+
+        private void LoadSettings()
+        {
+            _playerSettingsService.PlayerSettings = _saveLoadService.LoadGameSettings() ?? new PlayerSettings();
         }
 
         private void LoadProgressOrUnitNew() =>
@@ -36,7 +48,7 @@ namespace Game.Infrastructure.States
 
         private PlayerProgress NewProgress()
         {
-            var playerProgress = new PlayerProgress("Game");
+            var playerProgress = new PlayerProgress(InitialLevel);
             return playerProgress;
         }
     }

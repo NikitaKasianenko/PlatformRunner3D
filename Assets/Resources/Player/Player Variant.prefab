@@ -3279,7 +3279,7 @@ MonoBehaviour:
   _jumpHeight: 2
   _gravity: -16
   _groundCheck: {fileID: 7657266814173421233}
-  _groundCheckRadius: 0.2
+  _groundCheckRadius: 0.4
   _groundLayer:
     serializedVersion: 2
     m_Bits: 8

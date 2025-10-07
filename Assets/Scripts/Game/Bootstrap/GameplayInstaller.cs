@@ -1,16 +1,13 @@
-﻿using System.Net.Mime;
-using Cinemachine;
+﻿using Cinemachine;
 using Game.CameraLogic;
 using Game.Infrastructure.AssetsManagement;
 using Game.Infrastructure.Factory;
-using Game.Infrastructure.Services;
+using Game.Infrastructure.Scene;
 using Game.Infrastructure.Services.Input;
 using Game.Infrastructure.Services.PersistentProgress;
-using Game.Infrastructure.Services.SaveLoad;
 using Game.Infrastructure.Signals;
 using Game.Infrastructure.States;
 using SimpleInputNamespace;
-using UnityEngine;
 using Zenject;
 
 namespace Game.Bootstrap
@@ -20,6 +17,7 @@ namespace Game.Bootstrap
         public Touchpad touchpad;
         public Joystick joystick;
         public CinemachineVirtualCamera virtualCamera;
+        
         public override void InstallBindings()
         {
             BindStates();
@@ -28,25 +26,18 @@ namespace Game.Bootstrap
             BindGameSceneBootstrap();
             BindAssets();
             BindGameFactory();
-            BindSignals();
             BindReaders();
 
         }
 
         private void BindReaders()
         {
+            // Container.BindInterfacesTo<SceneReadersRegistrar>().AsSingle();
+            
             Container.Bind<ISaveProgressReader>()
                 .FromComponentsInHierarchy()
                 .AsTransient();
         }
-
-
-        private void BindSignals()
-        {
-            SignalBusInstaller.Install(Container);
-            Container.DeclareSignal<PlayerDiedSignal>();
-        }
-
 
         private void BindGameSceneBootstrap()
         {

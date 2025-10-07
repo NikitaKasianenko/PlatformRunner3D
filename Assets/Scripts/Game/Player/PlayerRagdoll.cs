@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Threading.Tasks;
+using Unity.VisualScripting;
 using UnityEngine.Serialization;
 
 namespace Game.Player
@@ -29,7 +30,8 @@ namespace Game.Player
             SetRagdollEnabled(true);
             
             await Task.Delay((int)(duration * 1000));
-            
+            if(_animator == null) return;
+
             SetRagdollEnabled(false);
             _characterController.enabled = true;
 

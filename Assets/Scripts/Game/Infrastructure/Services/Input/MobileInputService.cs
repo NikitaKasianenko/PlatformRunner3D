@@ -14,8 +14,11 @@ namespace Game.Infrastructure.Services.Input
             _touchpad = touchpad;
             _joystick = joystick;
         }
-        public override Vector2 Axis => _joystick.Value;
+        public override Vector2 Axis => _joystick.Value;    
 
         public override Vector2 MouseAxis => _touchpad.Value;
+        
+        
+        
     }
 }

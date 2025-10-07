@@ -41,6 +41,12 @@ namespace Game.Infrastructure.States
         private void SetupWorld()
         {
             SetupPlayer();
+            SetupHud();
+        }
+
+        private void SetupHud()
+        {
+            _gameFactory.CreateHud();
         }
 
         private void InformProgressReaders()
@@ -69,18 +75,20 @@ namespace Game.Infrastructure.States
         
         private Vector3 GetSpawnPosition()
         {
-            Vector3Data savedPosition = _persistentProgressService.Progress.WorldData.PositionOnLevel.Position;
-            if (savedPosition != null)
-            {
-                return savedPosition.AsUnityVector();
-            }
+            string currentLevel = GlobalUtils.CurrentLevel();
+
+            Vector3Data saved = _persistentProgressService.Progress.WorldData.GetPositionForLevel(currentLevel);
+            if (saved != null)
+                return saved.AsUnityVector();
+
             GameObject spawnPoint = GameObject.FindWithTag(Constants.SpawnPoint);
             if (spawnPoint != null)
             {
-                _persistentProgressService.Progress.WorldData.PositionOnLevel.Position =
-                    spawnPoint.transform.position.AsVectorData();
+                _persistentProgressService.Progress.WorldData.SetPositionForLevel(
+                    currentLevel, spawnPoint.transform.position.AsVectorData());
                 return spawnPoint.transform.position;
             }
+
             return Vector3.zero;
         }
 

@@ -21,10 +21,11 @@ namespace Project.Bootstrap
 
    
 
-        private void Start()
+        private void Awake()
         {
             Debug.Log(">>> ProjectBootstrapper started");
             _gameStateMachine.RegisterState(_statesFactory.Create<BootstrapState>());
+            _gameStateMachine.RegisterState(_statesFactory.Create<MainMenuState>());
             _gameStateMachine.RegisterState(_statesFactory.Create<LoadProgressState>());
             _gameStateMachine.RegisterState(_statesFactory.Create<LoadLevelState>());
             _gameStateMachine.Enter<BootstrapState>();

@@ -34,6 +34,12 @@ namespace Game.Infrastructure.Factory
             return player;
         }
 
+        public void CreateHud()
+        {
+            GameObject hudPrefab = _assets.Load(AssetsPath.Hud);
+            GameObject hud = _container.InstantiatePrefab(hudPrefab);
+        }
+
         private void RegisterProgressWatchers(GameObject player)
         {
             foreach (ISaveProgressReader progressReader in player.GetComponentsInChildren<ISaveProgressReader>())

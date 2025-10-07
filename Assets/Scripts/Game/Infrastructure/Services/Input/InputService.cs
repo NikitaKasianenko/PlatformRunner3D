@@ -12,7 +12,7 @@ namespace Game.Infrastructure.Services.Input
 
         public abstract Vector2 Axis { get; }
         public abstract Vector2 MouseAxis { get; }
-        public bool IsJumpButtonUp => SimpleInput.GetButtonUp(Jump);
+        public bool IsJumpButtonUp => SimpleInput.GetButtonDown(Jump);
 
 
     }

@@ -6,6 +6,8 @@ namespace Game.Infrastructure.Services.SaveLoad
     {
         PlayerProgress LoadProgress();
         void SaveProgress();
-        
+        PlayerSettings LoadGameSettings();
+        void SaveGameSettings();
+
     }
 }

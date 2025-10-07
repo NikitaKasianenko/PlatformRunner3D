@@ -9,24 +9,23 @@ namespace Game.Infrastructure.Services.SaveLoad
     {
         private readonly IProgressWatchersRegister _register;
         private readonly IPersistentProgressService _persistentProgressService;
+        private readonly IPlayerSettingsService _playerSettingsService;
         private const string ProgressKey = "Progress";
+        private const string SettingKey = "Settings";
 
-        public SaveLoadService(IProgressWatchersRegister register, IPersistentProgressService  persistentProgressService)
+        public SaveLoadService(IProgressWatchersRegister register, IPersistentProgressService  persistentProgressService, IPlayerSettingsService playerSettingsService)
         {
             _register = register;
             _persistentProgressService = persistentProgressService;
+            _playerSettingsService = playerSettingsService;
         }
 
         public PlayerProgress LoadProgress()
         {
-            string json = PlayerPrefs.GetString(ProgressKey);
-            if (string.IsNullOrEmpty(json))
-            {
-                return null;
-            }
-
+            if (!ExtractData(out var json,ProgressKey)) return null;
             return json.ToDeserialized<PlayerProgress>();
         }
+
 
         public void SaveProgress()
         {
@@ -38,6 +37,29 @@ namespace Game.Infrastructure.Services.SaveLoad
             PlayerPrefs.SetString(ProgressKey, json);
             PlayerPrefs.Save();
 
+        }
+
+        public PlayerSettings LoadGameSettings()
+        {
+            if (!ExtractData(out var json,SettingKey)) return null;
+            return json.ToDeserialized<PlayerSettings>();
+        }
+
+        private static bool ExtractData(out string json, string key)
+        {
+            json = PlayerPrefs.GetString(key);
+            if (string.IsNullOrEmpty(json))
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public void SaveGameSettings()
+        {
+            PlayerPrefs.SetString(SettingKey,_playerSettingsService.PlayerSettings.ToJson());
+            PlayerPrefs.Save();
         }
     }
 }
