@@ -17,13 +17,11 @@ namespace Game.Scene.Checkpoint
         [SerializeField] private Ease shrinkEase = Ease.InBack;
         
         private Sequence _sequence;
-        private bool _collected;
 
         private Tween _currentTween;
 
         public Tween Play()
         {
-            _collected = true;
             _sequence?.Kill();
             _sequence = DOTween.Sequence();
             _sequence.Append(transform.DOJump(transform.position, jumpPower, jumpCount, jumpDuration).SetEase(Ease.OutQuad));

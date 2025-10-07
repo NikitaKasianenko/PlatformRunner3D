@@ -7,12 +7,10 @@ using UnityEngine;
 
 namespace Game.Scene.Checkpoint
 {
-    public class CheckPoint : CheckPointBase, ISaveProgressReader
+    public class CheckPoint : CheckPointBase
     {
         [SerializeField] private string persistentId = "0";
         [SerializeField] private ParticleSystem _particleSystem;
-
-        private Coroutine _checkpointRoutine;
 
         private IVFX  _vfx;
         private IAnimation _animation;
@@ -44,7 +42,6 @@ namespace Game.Scene.Checkpoint
             _vfx?.Play();
             yield return new WaitForSeconds(_particleSystem.main.duration);
             DisableSelf();
-            _checkpointRoutine = null;
         }
 
     }

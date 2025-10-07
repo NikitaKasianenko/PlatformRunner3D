@@ -810,10 +810,18 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7410893547296589650, guid: dcba7ff4fe3d8c044a180812181e26ec, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 141a4dafab66356418b95853fd46d97a, type: 3}
     - target: {fileID: 8226969173952956728, guid: dcba7ff4fe3d8c044a180812181e26ec, type: 3}
       propertyPath: m_Color.a
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8685482059586545145, guid: dcba7ff4fe3d8c044a180812181e26ec, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 3ef3e5f1f8ec0624b909d99ef8428fa7, type: 3}
     - target: {fileID: 8843476907308003827, guid: dcba7ff4fe3d8c044a180812181e26ec, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

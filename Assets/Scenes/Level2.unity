@@ -978,7 +978,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f6e16106f65a7174bbf6f99fbd3d228c, type: 2}
+  - {fileID: 2100000, guid: ab288bc83c855e74183d1ace6bc7f5bb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4544,7 +4544,7 @@ PrefabInstance:
     - target: {fileID: 2513962854098716491, guid: a836c73f97c7138499787e030a2cead9, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: d7da44437ac29c84c9c93c83fce3b7ec, type: 2}
+      objectReference: {fileID: 2100000, guid: 5578067c38784bef898746ac26c3fc28, type: 2}
     - target: {fileID: 3375014064291292262, guid: a836c73f97c7138499787e030a2cead9, type: 3}
       propertyPath: m_LocalScale.x
       value: 4
@@ -7341,7 +7341,7 @@ PrefabInstance:
     - target: {fileID: 2513962854098716491, guid: a836c73f97c7138499787e030a2cead9, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: d7da44437ac29c84c9c93c83fce3b7ec, type: 2}
+      objectReference: {fileID: 2100000, guid: 5578067c38784bef898746ac26c3fc28, type: 2}
     - target: {fileID: 3375014064291292262, guid: a836c73f97c7138499787e030a2cead9, type: 3}
       propertyPath: m_LocalScale.x
       value: 4
@@ -8774,7 +8774,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3970279510670344846, guid: c572019edd48d3842b010f38464498fd, type: 3}
       propertyPath: persistentId
-      value: 99
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9911,7 +9911,7 @@ PrefabInstance:
     - target: {fileID: 2513962854098716491, guid: a836c73f97c7138499787e030a2cead9, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: d7da44437ac29c84c9c93c83fce3b7ec, type: 2}
+      objectReference: {fileID: 2100000, guid: 5578067c38784bef898746ac26c3fc28, type: 2}
     - target: {fileID: 3375014064291292262, guid: a836c73f97c7138499787e030a2cead9, type: 3}
       propertyPath: m_LocalScale.x
       value: 4

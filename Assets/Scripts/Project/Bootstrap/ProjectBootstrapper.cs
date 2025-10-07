@@ -32,6 +32,9 @@ namespace Project.Bootstrap
             
             SceneAccess.SceneAccess.WasOnInitial = true;
             
+            Application.targetFrameRate = 120;
+            QualitySettings.vSyncCount = 0;
+            
         }
         
         
