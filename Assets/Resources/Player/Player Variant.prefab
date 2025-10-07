@@ -3279,7 +3279,7 @@ MonoBehaviour:
   _jumpHeight: 2
   _gravity: -16
   _groundCheck: {fileID: 7657266814173421233}
-  _groundCheckRadius: 0.4
+  _groundCheckRadius: 0.3
   _groundLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -3336,7 +3336,7 @@ Transform:
   m_GameObject: {fileID: 7532176555008262493}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: -0.00382, z: -0}
+  m_LocalPosition: {x: -3.2311743e-27, y: -0.004499995, z: -4.656613e-10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

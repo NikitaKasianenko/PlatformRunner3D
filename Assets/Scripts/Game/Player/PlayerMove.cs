@@ -60,11 +60,6 @@ namespace Game.Player
 
         private void HandleJump()
         {
-            bool wantJump = Input.GetKeyDown(KeyCode.Space);
-            if (wantJump)
-            {
-                // Debug.Log(wantJump);
-            }
             if (isGrounded && velocity.y < 0)
             {
                 velocity.y = -2f;
@@ -72,7 +67,6 @@ namespace Game.Player
 
             if (isGrounded && _inputService.IsJumpButtonUp)
             {
-                // Debug.Log("Jumped");
                 velocity.y = Mathf.Sqrt(_jumpHeight * -2f * _gravity);
             }
 
@@ -125,8 +119,6 @@ namespace Game.Player
         }
         
 
-
-
         public void LoadProgress(PlayerProgress progress)
         {
             Vector3Data savedPosition = progress.WorldData.GetPositionForLevel(GlobalUtils.CurrentLevel());
@@ -161,6 +153,14 @@ namespace Game.Player
                 _signalBus.Fire(new PlayerDiedSignal(gameObject));
             }
             
+        }
+        
+        private void OnCollisionEnter(Collision other)
+        {
+            if (other.gameObject.CompareTag(Constants.DeadZoneTag))
+            {
+                _signalBus.Fire(new PlayerDiedSignal(gameObject));
+            }
         }
     }
 }

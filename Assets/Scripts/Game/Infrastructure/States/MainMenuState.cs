@@ -45,7 +45,7 @@ namespace Game.Infrastructure.States
 
         public void Exit()
         {
-            _signalBus.Unsubscribe<LevelChosenSignal>(HandleLevel);
+            _signalBus.TryUnsubscribe<LevelChosenSignal>(HandleLevel);
         }
     }
 }

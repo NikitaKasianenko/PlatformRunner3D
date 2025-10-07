@@ -39,7 +39,7 @@ namespace Game.CameraLogic
 
             _rotationX += _input.MouseAxis.x * _playerSettingsService.PlayerSettings.Sensitivity.x;
             _rotationY -= _input.MouseAxis.y *  _playerSettingsService.PlayerSettings.Sensitivity.y;
-            _rotationY = Mathf.Clamp(_rotationY, -30f, 70f);
+            _rotationY = Mathf.Clamp(_rotationY, -30f, 80f);
             var rotation = Quaternion.Euler(_rotationY, _rotationX, 0);
             _transposer.m_FollowOffset = rotation * new Vector3(0, 0, -5f); 
         }
